@@ -10,7 +10,7 @@
         header { background: var(--primary); color: var(--white); padding: 40px 20px; text-align: center; }
         .hidden { display: none !important; }
         .container { width: 95%; max-width: 900px; margin: 40px auto; padding: 20px; background: var(--white); border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn { background: var(--primary); color: var(--white); padding: 12px 25px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.2s; }
+        .btn { background: var(--primary); color: var(--white); padding: 12px 25px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
         .btn:hover { background: var(--accent); }
         .btn-delete { background: #cc0000; border-color: #cc0000; font-size: 12px; padding: 8px 15px; }
         .card { background: var(--white); padding: 15px; border-radius: 8px; margin: 10px; display: inline-block; width: 200px; border: 1px solid #ddd; vertical-align: top; }
@@ -120,6 +120,12 @@
             renderItems();
         }
 
+        function sendOrder(itemName, itemPrice) {
+            const subject = `Order Request: ${itemName}`;
+            const body = `Hello!%0A%0AI would like to order the ${itemName} for ${itemPrice}.%0A%0APlease let me know about availability and next steps.%0A%0AThank you!`;
+            window.location.href = `mailto:xandermangreat@gmail.com?subject=${subject}&body=${body}`;
+        }
+
         function renderItems() {
             const userDiv = document.getElementById('shop-items-user');
             const adminDiv = document.getElementById('shop-items-admin');
@@ -130,7 +136,7 @@
                 adminDiv.innerHTML = "<p>Your shop is empty. Click 'Upload' to add a plushie.</p>";
             } else {
                 items.forEach(item => {
-                    userDiv.innerHTML += `<div class="card"><img src="${item.img}"><h3>${item.name}</h3><p>${item.price}</p><button class="btn">Order</button></div>`;
+                    userDiv.innerHTML += `<div class="card"><img src="${item.img}"><h3>${item.name}</h3><p>${item.price}</p><button class="btn" onclick="sendOrder('${item.name}', '${item.price}')">Order</button></div>`;
                     adminDiv.innerHTML += `<div class="card"><img src="${item.img}"><h3>${item.name}</h3><p>${item.price}</p><button class="btn btn-delete" onclick="deleteItem(${item.id})">Delete Item</button></div>`;
                 });
             }
