@@ -49,7 +49,7 @@
             <h3>Contact Me</h3>
             <p>📧 Email: xandermangreat@gmail.com</p>
             <p style="font-style:italic; font-size: 0.85em;">*I take orders one at a time; if I don't respond to you I'm busy with someone else.</p>
-            <button class="btn" style="background:var(--accent)" onclick="sendOrder(itemName, itemPrice)">Logout</button>
+            <button class="btn" style="background:var(--accent)" onclick="logOut()">Logout</button>
         </div>
     </div>
 
@@ -151,6 +151,13 @@
                 let name = card.querySelector('h3').innerText.toLowerCase();
                 card.style.display = name.includes(filter) ? "inline-block" : "none";
             });
+        }
+
+        function logOut() {
+            let loginWindow = document.getElementById("login-section");
+            let userPage = document.getElementById("user-page");
+            loginWindow.style.display = "block";
+            userPage.style.display = "none";
         }
     </script>
 </body>
